@@ -47,23 +47,18 @@ def exit_jukebox
 end
 
 def run(playlist)
-    help
-    puts "Please enter a command:"
-    command = gets.chomp
-    loop do
+    command = 0
+    until command == "exit"
+      help
+      puts "Please enter a command:"
+      command = gets.chomp
       if command == "help"
-        run(playlist)
-        break if command == "exit"
+        help
       elsif command == "list"
         list(playlist)
-        run(playlist)
-        break if command == "exit"
       elsif command == "play"
         play(playlist)
-        run(playlist)
-        break if command == "exit"
       end
-      break
     end
     exit_jukebox
 end
