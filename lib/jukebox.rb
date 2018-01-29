@@ -1,3 +1,5 @@
+
+
 songs = [
   "Phoenix - 1901",
   "Tokyo Police Club - Wait Up",
@@ -10,3 +12,53 @@ songs = [
   "Amos Lee - Keep It Loose, Keep It Tight"
 ]
 
+def help
+  puts "I accept the following commands:"
+  puts "- help : displays this help message"
+  puts "- list : displays a list of songs you can play"
+  puts "- play : lets you choose a song to play"
+  puts "- exit : exits this program"
+end
+
+def list(playlist)
+  playlist.each_with_index do |song, index|
+    index +=1
+    puts "#{index}. #{song}"
+  end
+end
+
+def play(playlist)
+  num = playlist.length
+  range = (1..num).to_a
+  puts "Please enter a song name or number:"
+  song_name = gets.chomp
+  if playlist.include?(song_name)
+    puts "Playing #{song_name}"
+  elsif range.include?(song_name.to_i)
+    song = playlist[song_name.to_i - 1]
+    puts "Playing #{song}"
+  else
+    puts "Invalid input, please try again"
+  end
+end
+
+def exit_jukebox
+  puts "Goodbye"
+end
+
+def run(playlist)
+    command = 0
+    until command == "exit"
+      help
+      puts "Please enter a command:"
+      command = gets.chomp
+      if command == "help"
+        help
+      elsif command == "list"
+        list(playlist)
+      elsif command == "play"
+        play(playlist)
+      end
+    end
+    exit_jukebox
+end
